@@ -15,8 +15,8 @@ window.initImmersiveHome = function () {
   renderer.setClearColor(0xe9eee5,1);
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   const scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(36,1,.1,150);
-  scene.add(new THREE.HemisphereLight(0xffffff,0x9fae96,2.5));
-  const sun=new THREE.DirectionalLight(0xfff4df,4); sun.position.set(6,12,7);sun.castShadow=true;
+  scene.add(new THREE.HemisphereLight(0xffffff,0x9fae96,1.6));
+  const sun=new THREE.DirectionalLight(0xfff4df,2.2); sun.position.set(6,12,7);sun.castShadow=true;
   sun.shadow.mapSize.set(2048,2048);sun.shadow.camera.left=-9;sun.shadow.camera.right=9;sun.shadow.camera.top=9;sun.shadow.camera.bottom=-9;sun.shadow.bias=-.001;scene.add(sun);
   const colors={cream:0xf5f0df,mint:0xa8c9b9,teal:0x318e87,dark:0x244e50,peach:0xe2b491,white:0xfffcf4,wood:0xc7a584};
   const materials={};Object.entries(colors).forEach(([k,v])=>materials[k]=new THREE.MeshStandardMaterial({color:v,roughness:.68}));
@@ -40,7 +40,7 @@ window.initImmersiveHome = function () {
   function select(e){current=e.detail.index; if(reduced)focusX=current*18;}
   function pointerMove(e){pointer.x=e.clientX/innerWidth-.5;pointer.y=e.clientY/innerHeight-.5;}
   const resize=new ResizeObserver(size);resize.observe(host);window.addEventListener('care-scene',select);window.addEventListener('pointermove',pointerMove,{passive:true});size();
-  function animate(){if(dead)return;frame=requestAnimationFrame(animate);focusX+=(current*18-focusX)*.07;const narrow=host.clientWidth<700;camera.position.set(focusX+8+(reduced?0:pointer.x*.6),7+(reduced?0:-pointer.y*.3),narrow?12:11);camera.lookAt(focusX,1.15,narrow?0:0);renderer.render(scene,camera);}
+  function animate(){if(dead)return;frame=requestAnimationFrame(animate);focusX+=(current*18-focusX)*.07;const narrow=host.clientWidth<700;camera.position.set(focusX+(narrow?13:8)+(reduced?0:pointer.x*.6),(narrow?10:7)+(reduced?0:-pointer.y*.3),narrow?20:11);camera.lookAt(focusX,1.15,narrow?0:0);renderer.render(scene,camera);}
   animate();host.classList.add('scene-ready');
   disposeCurrent=()=>{dead=true;cancelAnimationFrame(frame);resize.disconnect();window.removeEventListener('care-scene',select);window.removeEventListener('pointermove',pointerMove);scene.traverse(o=>{o.geometry?.dispose();if(o.material){for(const m of Array.isArray(o.material)?o.material:[o.material]){m.map?.dispose();m.dispose();}}});renderer.dispose();};
 };
