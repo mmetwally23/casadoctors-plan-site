@@ -1,0 +1,57 @@
+[
+  {
+    "scene": 0,
+    "name": "calling-around",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 182526,
+    "prompt": "Premium Egyptian family living room diorama with curved sage sofa, travertine table, appointment notes, brass clock and floating call symbols.",
+    "sharedDirection": "Highest-quality square original 3D architectural diorama. Ivory platform, sage and teal, realistic materials, rounded edges, soft ray-traced light, three-quarter isometric camera, no words, logos or watermark.",
+    "method": "Built-in image_gen; WebP encoding with sharp for website delivery",
+    "asset": "premium-scenes/calling-around.webp"
+  },
+  {
+    "scene": 1,
+    "name": "nearby-care",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 209896,
+    "prompt": "Premium contemporary Cairo neighborhood diorama with elegant clinics, olive gardens and luminous path to nearby clinic.",
+    "sharedDirection": "Highest-quality square original 3D architectural diorama. Ivory platform, sage and teal, realistic materials, rounded edges, soft ray-traced light, three-quarter isometric camera, no words, logos or watermark.",
+    "method": "Built-in image_gen; WebP encoding with sharp for website delivery",
+    "asset": "premium-scenes/nearby-care.webp"
+  },
+  {
+    "scene": 2,
+    "name": "doctor-choice",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 189292,
+    "prompt": "Premium private consultation room diorama with oak desk, upholstered sage chairs, stethoscope and frosted provider profile panel.",
+    "sharedDirection": "Highest-quality square original 3D architectural diorama. Ivory platform, sage and teal, realistic materials, rounded edges, soft ray-traced light, three-quarter isometric camera, no words, logos or watermark.",
+    "method": "Built-in image_gen; WebP encoding with sharp for website delivery",
+    "asset": "premium-scenes/doctor-choice.webp"
+  },
+  {
+    "scene": 3,
+    "name": "appointment-time",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 137398,
+    "prompt": "Premium appointment still life with ivory calendar, brass binding rings, selected teal date, analogue clock and smartphone.",
+    "sharedDirection": "Highest-quality square original 3D architectural diorama. Ivory platform, sage and teal, realistic materials, rounded edges, soft ray-traced light, three-quarter isometric camera, no words, logos or watermark.",
+    "method": "Built-in image_gen; WebP encoding with sharp for website delivery",
+    "asset": "premium-scenes/appointment-time.webp"
+  },
+  {
+    "scene": 4,
+    "name": "booking-confirmation",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 172124,
+    "prompt": "Premium calm family room with smartphone confirmation checkmark and restrained translucent teal halo.",
+    "sharedDirection": "Highest-quality square original 3D architectural diorama. Ivory platform, sage and teal, realistic materials, rounded edges, soft ray-traced light, three-quarter isometric camera, no words, logos or watermark.",
+    "method": "Built-in image_gen; WebP encoding with sharp for website delivery",
+    "asset": "premium-scenes/booking-confirmation.webp"
+  }
+]
