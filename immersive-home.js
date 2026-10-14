@@ -18,7 +18,7 @@ function mountArtwork(host,isJourney){
       const img=new Image();img.src=url;img.alt=alt[language][index];img.className='render-image';img.width=1254;img.height=1254;img.decoding='async';await img.decode();if(dead||request!==version)return;
       const old=stack.querySelector('.render-image.is-current');stack.appendChild(img);requestAnimationFrame(()=>{if(dead)return;img.classList.add('is-current');old?.classList.remove('is-current');host.classList.add('scene-ready');});
       setTimeout(()=>{if(old?.isConnected)old.remove();},reduced?0:950);
-      const next=({1:3,3:4})[index];if(next!==undefined){clearTimeout(idleTimer);idleTimer=setTimeout(()=>source(next).catch(()=>{}),900);}
+      const next=({1:2,2:3,3:4})[index];if(next!==undefined){clearTimeout(idleTimer);idleTimer=setTimeout(()=>source(next).catch(()=>{}),900);}
     }catch{if(!dead)caption.querySelector('small').textContent=language==='ar'?'تقدر تبدأ البحث مباشرة.':'You can start your search directly.';}
   }
   function onScene(e){if(e.detail.index!==current)select(e.detail.index);}
