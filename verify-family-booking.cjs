@@ -1,0 +1,28 @@
+const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
+const sandbox={console,Intl,Date,JSON,structuredClone,window:{addEventListener(){}},document:{addEventListener(){},querySelector(){return null;}},location:{hash:''},history:{replaceState(){}},setTimeout,clearTimeout};
+vm.createContext(sandbox);
+vm.runInContext(fs.readFileSync('home-first.js','utf8'),sandbox);
+const complete=fs.readFileSync('home-first-complete.js','utf8').replace(/window\.addEventListener\('hashchange',routeChanged\);routeChanged\(\);\s*$/,'');
+vm.runInContext(complete,sandbox);
+sandbox.check=(condition,message)=>assert.ok(condition,message);
+vm.runInContext(`
+C_render=()=>{};go=()=>{};
+const details={bookerName:'Demo Booker',bookerPhone:'+1 202 555 0146',recipientName:'Demo Recipient',recipientPhone:'+20 10 0000 0000',street:'Example Street',building:'Building A',adult:true,suitable:true,provider:1,slot:0,agreement:true,contactVerified:true,consentState:'approved',ack:true};
+Object.assign(form,details);C_submit();
+check(C_bookings.length===1&&C_bookings[0].status==='pending','A request starts pending.');
+C_transition('accepted');check(C_bookings[0].status==='accepted'&&C_bookings[0].payment==='hold','Acceptance must not complete payment.');
+C_transition('confirmed');const original=JSON.stringify(C_bookings[0].data);const eventCount=C_bookings[0].events.length;
+C_transition('confirmed');check(C_bookings[0].events.length===eventCount,'Repeating confirmation must be idempotent.');
+C_beginChange();form.provider=2;form.slot=1;
+check(C_bookings[0].status==='confirmed'&&JSON.stringify(C_bookings[0].data)===original,'Editing a change preserves the original.');
+C_submit();check(C_bookings.length===1&&JSON.stringify(C_bookings[0].data)===original,'Submitting a change preserves the original record.');
+C_change('accept');check(JSON.stringify(C_bookings[0].data)===original,'Acceptance alone must not replace the visit.');
+C_change('confirm');check(C_bookings[0].data.provider===2&&C_bookings[0].data.slot===1&&C_bookings[0].previous.length===1,'Replacement applies only after adjustment.');
+const replacement=JSON.stringify(C_bookings[0].data);C_beginChange();form.slot=0;C_submit();C_change('decline');
+check(C_bookings[0].status==='confirmed'&&JSON.stringify(C_bookings[0].data)===replacement,'Declining a change retains the confirmed visit.');
+start('self');check(C_bookings.length===1,'Starting another draft preserves earlier bookings.');check(C_firstIncomplete()===0,'An empty direct-link draft must return to recipient intake.');
+Object.assign(form,details,{who:'self'});C_submit();check(C_bookings.length===2&&C_bookings[1].id!==C_bookings[0].id,'Multiple requests have separate records.');
+C_active=C_bookings[0].id;C_transition('cancelled');check(C_bookings[0].payment==='refundpending','A paid cancellation must expose refund follow-up.');
+page='providers';C_newCase('provider','provider');check(C_cases[0].bookingId===null,'A provider inquiry must not inherit a patient booking.');
+`,sandbox);
+console.log('PASS: pending/paid separation, idempotency, reschedule preservation, accepted replacement, declined change, multiple bookings, direct-link intake, refund follow-up and provider-case separation.');
