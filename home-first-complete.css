@@ -6,3 +6,4 @@
 @media(prefers-reduced-motion:reduce){.orbit-ring{animation:none}}
 .contact-check{display:flex;flex-wrap:wrap;align-items:center;gap:12px;background:#e8f0e3;border-radius:18px;padding:17px;margin-bottom:22px}.contact-check>div{flex:1;min-width:150px}.contact-check p{font-size:13px;margin-top:5px;text-align:start}.contact-check small{width:100%;font-size:12px}#codeError{color:#8c4639;font-size:13px}.contact-check button{font-size:13px}
 @media(max-width:760px){html[dir=rtl] .dashboard h1{font-size:32px;line-height:1.45}.contact-check{padding:15px}.contact-check button{width:100%}.contact-check small{font-size:12px}}
+.change-comparison{display:grid;gap:12px;margin:18px 0}.change-comparison>div{padding:13px;background:#ffffffa6;border-radius:13px}.change-comparison b,.change-comparison small{display:block}.change-comparison b{font-size:13px;margin-top:5px}.change-comparison small{font-size:12px}
