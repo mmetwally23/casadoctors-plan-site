@@ -10,6 +10,7 @@ C_render=()=>{};go=()=>{};
 const details={bookerName:'Demo Booker',bookerPhone:'+1 202 555 0146',recipientName:'Demo Recipient',recipientPhone:'+20 10 0000 0000',street:'Example Street',building:'Building A',adult:true,suitable:true,provider:1,slot:0,agreement:true,contactVerified:true,consentState:'approved',ack:true};
 Object.assign(form,details);C_submit();
 check(C_bookings.length===1&&C_bookings[0].status==='pending','A request starts pending.');
+C_submit();check(C_bookings.length===1,'Repeated submission must not create duplicate requests.');
 C_transition('accepted');check(C_bookings[0].status==='accepted'&&C_bookings[0].payment==='hold','Acceptance must not complete payment.');
 C_transition('confirmed');const original=JSON.stringify(C_bookings[0].data);const eventCount=C_bookings[0].events.length;
 C_transition('confirmed');check(C_bookings[0].events.length===eventCount,'Repeating confirmation must be idempotent.');
